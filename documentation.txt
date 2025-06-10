@@ -1,0 +1,93 @@
+Elementor Query String Dynamic Tag - Documentation
+================================================
+
+Plugin Information
+------------------
+Plugin Name: Elementor Query String Dynamic Tag
+Description: Adds a custom dynamic tag to Elementor for retrieving query string parameters, specifically for Gravity Forms data.
+Version: 1.0
+Author: WP Pro A to Z | Grok
+Author URI: https://wpproatoz.com
+Requires at least: WordPress 6.0
+Requires PHP: 8.0
+Text Domain: elementor-query-string
+GitHub Plugin URI: https://github.com/Ahkonsu/wpproatoz-elementor-query-string-dynamic-tag/releases
+GitHub Branch: main
+Update URI: https://github.com/Ahkonsu/wpproatoz-elementor-query-string-dynamic-tag/releases
+
+Overview
+--------
+This plugin registers a custom dynamic tag in Elementor Pro, enabling users to display query string parameters (e.g., `?first_name=Alice`) in Elementor widgets. It is designed for integration with Gravity Forms, where form submissions pass field data via query strings during redirect confirmations.
+
+Requirements
+------------
+- Elementor Pro (required for dynamic tags).
+- Gravity Forms (optional, for generating query string data).
+- WordPress 6.0 or higher.
+- PHP 8.0 or higher.
+
+Installation
+------------
+1. Download the plugin from https://github.com/Ahkonsu/wpproatoz-elementor-query-string-dynamic-tag/releases.
+2. Upload the `elementor-query-string` folder to `/wp-content/plugins/`.
+3. Activate the plugin in the WordPress Plugins menu.
+4. Verify that Elementor Pro is installed and active.
+
+Configuration
+-------------
+1. Gravity Forms Setup:
+   - Navigate to your Gravity Form’s Settings > Confirmations.
+   - Create or edit a confirmation with Type set to "Redirect".
+   - Enter the redirect URL (e.g., `https://example.com/thank-you/`).
+   - Check "Pass Field Data Via Query String".
+   - Add query string parameters using merge tags, e.g., `first_name={Name (First):1.3}`.
+   - Save the confirmation.
+
+2. Elementor Setup:
+   - Edit your confirmation page in Elementor.
+   - Add a widget (e.g., Heading, Text Editor) where you want to display the query string data.
+   - Click the Dynamic Tags icon in the widget’s content field.
+   - Select "Query String" from the "Request" group.
+   - Enter the query parameter name (e.g., `first_name`) in the tag settings.
+   - Save and publish the page.
+
+Usage Example
+-------------
+1. Gravity Forms submits a form with First Name "Alice".
+2. Redirect URL: `https://example.com/thank-you/?first_name=Alice`.
+3. Elementor page uses a Heading widget with the "Query String" dynamic tag set to `first_name`.
+4. Output: "Thank You, Alice!".
+
+Security
+--------
+- The plugin sanitizes query string data using `sanitize_text_field()` to prevent XSS and other vulnerabilities.
+- Always test query string inputs with special characters to ensure proper URL encoding by Gravity Forms.
+
+Customization
+-------------
+To modify the dynamic tag:
+- Edit `elementor-query-string.php` in the plugin folder.
+- The `Query_String_Tag` class defines the dynamic tag behavior.
+- Extend the `register_controls()` method to add more settings (e.g., default values, formatting options).
+- Update the `render()` method for custom output logic.
+
+Troubleshooting
+---------------
+- **Dynamic Tag Not Appearing**: Ensure Elementor Pro is active and WordPress is version 6.0 or higher.
+- **No Output**: Verify the query parameter name matches the Gravity Forms query string (e.g., `first_name`).
+- **Special Characters**: Gravity Forms URL-encodes values (e.g., spaces become `%20`). Ensure your page handles decoding if needed.
+
+Support
+-------
+- Website: https://wpproatoz.com
+- GitHub Issues: https://github.com/Ahkonsu/wpproatoz-elementor-query-string-dynamic-tag
+- For customizations or bug reports, open an issue on GitHub.
+
+License
+-------
+GPLv2 or later. See https://www.gnu.org/licenses/gpl-2.0.html.
+
+Changelog
+---------
+Version 1.0:
+- Initial release.
